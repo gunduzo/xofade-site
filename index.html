@@ -146,54 +146,104 @@
 
       /* ── Screenshots ────────────────────────────────── */
       .screenshots {
-        padding: 40px 24px 60px;
-        max-width: 900px;
-        margin: 0 auto;
+        padding: 60px 0 70px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .screenshots::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at 50% 50%,
+          rgba(96, 165, 250, 0.06) 0%,
+          rgba(167, 139, 250, 0.04) 40%,
+          transparent 70%
+        );
+        pointer-events: none;
       }
 
       .screenshots h2 {
         text-align: center;
         font-size: 1.5rem;
         font-weight: 700;
-        margin-bottom: 24px;
+        margin-bottom: 8px;
         color: #f1f5f9;
+        position: relative;
+      }
+
+      .screenshots .subtitle {
+        text-align: center;
+        color: #64748b;
+        font-size: 0.95rem;
+        margin-bottom: 32px;
+        position: relative;
       }
 
       .screenshot-scroll {
         display: flex;
-        gap: 16px;
+        gap: 20px;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        padding-bottom: 12px;
+        padding: 0 max(24px, calc((100vw - 900px) / 2)) 16px;
       }
 
       .screenshot-scroll::-webkit-scrollbar {
-        height: 6px;
+        height: 4px;
       }
 
       .screenshot-scroll::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.04);
-        border-radius: 3px;
+        background: transparent;
       }
 
       .screenshot-scroll::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.12);
-        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
       }
 
-      .screenshot-scroll img {
-        height: 480px;
-        width: auto;
-        border-radius: 16px;
-        scroll-snap-align: start;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      .screenshot-item {
         flex-shrink: 0;
+        scroll-snap-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .screenshot-frame {
+        position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.06);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .screenshot-frame:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 16px 60px rgba(96, 165, 250, 0.15),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+
+      .screenshot-frame img {
+        height: 500px;
+        width: auto;
+        display: block;
+      }
+
+      .screenshot-caption {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #64748b;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
       }
 
       @media (max-width: 480px) {
-        .screenshot-scroll img {
-          height: 380px;
+        .screenshot-frame img {
+          height: 400px;
         }
       }
 
@@ -334,13 +384,39 @@
 
     <!-- Screenshots -->
     <section class="screenshots">
-      <h2>Gameplay</h2>
+      <h2>See it in action</h2>
+      <p class="subtitle">Swipe to explore</p>
       <div class="screenshot-scroll">
-        <img src="screenshots/1-3x3-rush-win-dark.png" alt="3x3 Rush mode win" />
-        <img src="screenshots/2-6x6-classic-dark.png" alt="6x6 Classic mode dark" />
-        <img src="screenshots/3-6x6-rush-progress-dark.png" alt="6x6 Rush mode in progress" />
-        <img src="screenshots/4-6x6-classic-win-light.png" alt="6x6 Classic light mode" />
-        <img src="screenshots/5-settings-light.png" alt="Settings panel" />
+        <div class="screenshot-item">
+          <div class="screenshot-frame">
+            <img src="screenshots/1-3x3-rush-win-dark.png" alt="3x3 Rush mode win" />
+          </div>
+          <span class="screenshot-caption">Rush Mode Win</span>
+        </div>
+        <div class="screenshot-item">
+          <div class="screenshot-frame">
+            <img src="screenshots/2-6x6-classic-dark.png" alt="6x6 Classic mode dark" />
+          </div>
+          <span class="screenshot-caption">6&times;6 Classic</span>
+        </div>
+        <div class="screenshot-item">
+          <div class="screenshot-frame">
+            <img src="screenshots/3-6x6-rush-progress-dark.png" alt="6x6 Rush mode in progress" />
+          </div>
+          <span class="screenshot-caption">Rush &mdash; Fading Marks</span>
+        </div>
+        <div class="screenshot-item">
+          <div class="screenshot-frame">
+            <img src="screenshots/4-6x6-classic-win-light.png" alt="6x6 Classic light mode" />
+          </div>
+          <span class="screenshot-caption">Light Theme</span>
+        </div>
+        <div class="screenshot-item">
+          <div class="screenshot-frame">
+            <img src="screenshots/5-settings-light.png" alt="Settings panel" />
+          </div>
+          <span class="screenshot-caption">Settings</span>
+        </div>
       </div>
     </section>
 
