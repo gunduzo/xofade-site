@@ -188,6 +188,13 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         padding: 0 max(24px, calc((100vw - 900px) / 2)) 16px;
+        justify-content: center;
+      }
+
+      @media (max-width: 1200px) {
+        .screenshot-scroll {
+          justify-content: flex-start;
+        }
       }
 
       .screenshot-scroll::-webkit-scrollbar {
@@ -216,15 +223,16 @@
         position: relative;
         border-radius: 24px;
         overflow: hidden;
+        background: #111827;
         box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5),
-          0 0 0 1px rgba(255, 255, 255, 0.06);
+          0 0 0 1px rgba(255, 255, 255, 0.08);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
       .screenshot-frame:hover {
         transform: translateY(-4px) scale(1.02);
         box-shadow: 0 16px 60px rgba(96, 165, 250, 0.15),
-          0 0 0 1px rgba(255, 255, 255, 0.1);
+          0 0 0 1px rgba(255, 255, 255, 0.12);
       }
 
       .screenshot-frame img {
