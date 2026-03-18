@@ -144,6 +144,59 @@
         line-height: 1.5;
       }
 
+      /* ── Screenshots ────────────────────────────────── */
+      .screenshots {
+        padding: 40px 24px 60px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .screenshots h2 {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 24px;
+        color: #f1f5f9;
+      }
+
+      .screenshot-scroll {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 12px;
+      }
+
+      .screenshot-scroll::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .screenshot-scroll::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 3px;
+      }
+
+      .screenshot-scroll::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 3px;
+      }
+
+      .screenshot-scroll img {
+        height: 480px;
+        width: auto;
+        border-radius: 16px;
+        scroll-snap-align: start;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 480px) {
+        .screenshot-scroll img {
+          height: 380px;
+        }
+      }
+
       /* ── Divider ──────────────────────────────────── */
       .divider {
         height: 1px;
@@ -274,6 +327,20 @@
           Follows your system preference. Neon glows in dark mode, clean shadows
           in light.
         </p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Screenshots -->
+    <section class="screenshots">
+      <h2>Gameplay</h2>
+      <div class="screenshot-scroll">
+        <img src="screenshots/1-3x3-rush-win-dark.png" alt="3x3 Rush mode win" />
+        <img src="screenshots/2-6x6-classic-dark.png" alt="6x6 Classic mode dark" />
+        <img src="screenshots/3-6x6-rush-progress-dark.png" alt="6x6 Rush mode in progress" />
+        <img src="screenshots/4-6x6-classic-win-light.png" alt="6x6 Classic light mode" />
+        <img src="screenshots/5-settings-light.png" alt="Settings panel" />
       </div>
     </section>
 
