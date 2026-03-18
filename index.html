@@ -197,17 +197,13 @@
         }
       }
 
+      .screenshot-scroll {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
       .screenshot-scroll::-webkit-scrollbar {
-        height: 4px;
-      }
-
-      .screenshot-scroll::-webkit-scrollbar-track {
-        background: transparent;
-      }
-
-      .screenshot-scroll::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 2px;
+        display: none;
       }
 
       .screenshot-item {
