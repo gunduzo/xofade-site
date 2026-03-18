@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XOFade — Tic-Tac-Toe, Evolved</title>
+    <meta
+      name="description"
+      content="Think you can beat an AI at tic-tac-toe? XOFade features boards up to 6x6, Rush mode with fading marks, and three difficulty levels."
+    />
+    <link rel="icon" href="icon.png" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, "SF Pro Display", "Segoe UI", sans-serif;
+        background: #080c1a;
+        color: #e2e8f0;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* ── Hero ─────────────────────────────────────── */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 80px 24px 60px;
+        position: relative;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -120px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(96, 165, 250, 0.12) 0%,
+          rgba(167, 139, 250, 0.08) 40%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .app-icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 28px;
+        box-shadow: 0 0 60px rgba(96, 165, 250, 0.25),
+          0 0 120px rgba(167, 139, 250, 0.15);
+        margin-bottom: 32px;
+        position: relative;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        margin-bottom: 8px;
+      }
+
+      .hero h1 .x {
+        color: #60a5fa;
+      }
+      .hero h1 .o {
+        color: #a78bfa;
+      }
+      .hero h1 .fade {
+        background: linear-gradient(135deg, #818cf8, #6366a5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .tagline {
+        font-size: 1.25rem;
+        color: #94a3b8;
+        max-width: 480px;
+        margin-bottom: 36px;
+      }
+
+      .store-badge {
+        display: inline-block;
+        transition: transform 0.2s ease;
+      }
+
+      .store-badge:hover {
+        transform: scale(1.05);
+      }
+
+      .store-badge img {
+        height: 54px;
+      }
+
+      /* ── Features ─────────────────────────────────── */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 24px 60px;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 28px 24px;
+        transition: border-color 0.3s ease, background 0.3s ease;
+      }
+
+      .feature-card:hover {
+        border-color: rgba(96, 165, 250, 0.25);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .feature-icon {
+        font-size: 1.75rem;
+        margin-bottom: 12px;
+      }
+
+      .feature-card h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #f1f5f9;
+        margin-bottom: 6px;
+      }
+
+      .feature-card p {
+        font-size: 0.95rem;
+        color: #94a3b8;
+        line-height: 1.5;
+      }
+
+      /* ── Divider ──────────────────────────────────── */
+      .divider {
+        height: 1px;
+        max-width: 900px;
+        margin: 0 auto;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.08),
+          transparent
+        );
+      }
+
+      /* ── CTA ──────────────────────────────────────── */
+      .cta {
+        text-align: center;
+        padding: 60px 24px;
+      }
+
+      .cta h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .cta p {
+        color: #94a3b8;
+        margin-bottom: 28px;
+        font-size: 1.05rem;
+      }
+
+      /* ── Footer ───────────────────────────────────── */
+      footer {
+        text-align: center;
+        padding: 40px 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        color: #64748b;
+        font-size: 0.85rem;
+      }
+
+      footer a {
+        color: #818cf8;
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      footer .links {
+        margin-bottom: 12px;
+      }
+
+      footer .links a + a {
+        margin-left: 24px;
+      }
+
+      /* ── Responsive ───────────────────────────────── */
+      @media (max-width: 480px) {
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .tagline {
+          font-size: 1.05rem;
+        }
+
+        .app-icon {
+          width: 96px;
+          height: 96px;
+          border-radius: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero -->
+    <section class="hero">
+      <img src="icon.png" alt="XOFade app icon" class="app-icon" />
+      <h1><span class="x">X</span><span class="o">O</span><span class="fade">Fade</span></h1>
+      <p class="tagline">
+        Tic-tac-toe with a twist &mdash; marks fade, boards grow, and the AI
+        fights back.
+      </p>
+      <a
+        href="https://apps.apple.com/app/xofade/id6744227498"
+        class="store-badge"
+      >
+        <img
+          src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+          alt="Download on the App Store"
+        />
+      </a>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Features -->
+    <section class="features">
+      <div class="feature-card">
+        <div class="feature-icon">#</div>
+        <h3>Boards up to 6&times;6</h3>
+        <p>
+          Go beyond the classic 3&times;3. Play on 4&times;4, 5&times;5, or
+          6&times;6 grids for deeper strategy.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&curren;</div>
+        <h3>Rush Mode</h3>
+        <p>
+          Your marks fade and vanish over time. Think fast, place smart, and
+          adapt before the board shifts under you.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&loz;</div>
+        <h3>Chill &middot; Spicy &middot; Savage</h3>
+        <p>
+          Three difficulty levels. Chill is forgiving. Savage plays near-perfect
+          strategy and punishes mistakes.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&frac12;</div>
+        <h3>Dark &amp; Light Themes</h3>
+        <p>
+          Follows your system preference. Neon glows in dark mode, clean shadows
+          in light.
+        </p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h2>Ready to play?</h2>
+      <p>Free on the App Store. No sign-up required.</p>
+      <a
+        href="https://apps.apple.com/app/xofade/id6744227498"
+        class="store-badge"
+      >
+        <img
+          src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+          alt="Download on the App Store"
+        />
+      </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="links">
+        <a href="privacy/">Privacy Policy</a>
+        <a href="mailto:gunduz_o@hotmail.com">Contact</a>
+      </div>
+      <p>&copy; 2026 Gunduz Ozan</p>
+    </footer>
+  </body>
+</html>
